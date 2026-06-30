@@ -1,41 +1,64 @@
-# KAT ZRT. — website
+# KAT Zrt. — website
 
-Company website for **KAT ZRT.**, built with Vite + React and deployed to GitHub Pages.
+Bilingual (Hungarian master / English) marketing website for **KAT Könyvszakértő,
+Adószakértő, Tanácsadó Zrt.**, a Budapest accounting · payroll · advisory · tax firm.
 
-## Stack
+It is a **static, multi-page site** — plain HTML/CSS/JS, no build step. The pages are
+the design source of truth from the Claude Design handoff (see `HANDOFF.md`), shipped
+as-is. Hosted on **GitHub Pages** (deploy from the `main` branch).
 
-- **Vite + React 18** (single-page app)
-- **GitHub Pages** hosting, deployed automatically via GitHub Actions (`.github/workflows/deploy.yml`)
-- `base: "./"` in `vite.config.js` so assets resolve under the Pages project subpath
+## Structure
+
+```
+index.html            Home (hero, services, credibility band, About, The Register, contact form)
+rolunk.html           About
+szolgaltatasok.html   Services index (01–04)
+konyveles.html        Accounting   ┐
+berszamfejtes.html    Payroll      │ four service detail pages
+tanacsadas.html       Advisory     │ (shared template)
+adotanacsadas.html    Tax advisory ┘
+referenciak.html      References ("The Register", grouped by sector)
+kapcsolat.html        Contact (details, map placeholder, enquiry form)
+impresszum.html       Imprint (legal company data)
+adatvedelem.html      Privacy notice (GDPR)
+
+kat.css               Complete design system (tokens, components, motion, responsive) — canonical
+kat.js                Shared behaviour (reveal observer, HU/EN toggle, mobile menu, form validation, ledger)
+kat-logo.png          White wordmark (header + footer)
+.nojekyll             Serve files as-is on GitHub Pages (no Jekyll processing)
+
+HANDOFF.md            The original design handoff spec (reference)
+CLAUDE.md             Build constitution + project notes for Claude
+```
 
 ## Run locally
 
-```bash
-npm install      # first time only
-npm run dev      # start the Vite dev server (hot reload)
-```
-
-Build a production bundle:
+It's static — just open `index.html` in a browser. For a proper local server (so
+relative links and `fetch` behave exactly like production):
 
 ```bash
-npm run build    # outputs to dist/
-npm run preview  # serve the built dist/ locally
+# any static server, e.g.
+npx serve .
+# or
+python -m http.server 8000
 ```
 
 ## Deploy
 
-Every push to `main` triggers the **Deploy to GitHub Pages** workflow, which builds
-the site and publishes `dist/`. You can also run it manually from the **Actions** tab.
+GitHub Pages is set to **deploy from branch** (`main`, root). Push to `main` and the
+live site updates automatically — no build, no Actions workflow.
 
-## Project layout
+Live URL: https://gyepe.github.io/kat-zrt-website/
 
-```
-index.html              Vite entry (head: title, SEO, favicon)
-src/main.jsx            React app entry
-public/                 static assets copied as-is (public/assets/favicon.svg)
-.github/workflows/      deploy.yml — Pages build & deploy
-vite.config.js          base "./" for the Pages subpath
-```
+## Before go-live — real data still needed
 
-> The real UI is being brought in from the Claude Design handoff. The current
-> `src/main.jsx` is a minimal placeholder confirming the build works.
+See `CLAUDE.md` and `HANDOFF.md` for the full list. The big ones:
+1. **Contact-form backend** — wire the enquiry form to email `info@katzrt.hu`
+   (planned via Web3Forms, client-side, like the OTOBOT site). The form must not go
+   live before the privacy page is final.
+2. **Legal values** in `impresszum.html` — cégjegyzékszám, adószám, képviselő,
+   tárhelyszolgáltató (currently "megadás alatt").
+3. **Final privacy text** in `adatvedelem.html` (currently a labelled draft).
+4. **Full client roster** for The Register (only 8 of ~23 shown).
+5. **Photography** for the `.bg-ph` placeholders.
+6. **SEO** — per-page meta description, OG tags, sitemap, robots, JSON-LD.

@@ -1,0 +1,36 @@
+/* ============================================================
+   Page-specific styles — ported verbatim from the design's
+   per-page <style> blocks. kat.css remains the canonical system;
+   these class names are page-unique so there's no cross-page leak.
+   ============================================================ */
+
+/* ---- About (rolunk): three principles ---- */
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid color-mix(in srgb,var(--stone) 32%,transparent);}
+.principle{padding:36px 32px 36px 0;border-bottom:1px solid color-mix(in srgb,var(--stone) 32%,transparent);}
+.principle:not(:first-child){padding-left:36px;border-left:1px solid color-mix(in srgb,var(--stone) 32%,transparent);}
+.principle .n{font-family:var(--ff-mono);font-size:14px;color:var(--brass);letter-spacing:.08em;}
+.principle h3{font-size:22px;font-weight:600;margin:16px 0 12px;}
+.principle p{color:var(--stone);font-size:16px;line-height:1.55;}
+
+/* ---- Service detail: prev/next navigation ---- */
+.svc-nav{display:flex;justify-content:space-between;gap:20px;border-top:1px solid color-mix(in srgb,var(--stone) 28%,transparent);padding-top:30px;}
+.svc-nav a{display:flex;flex-direction:column;gap:4px;cursor:pointer;}
+.svc-nav .dir{font-family:var(--ff-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);}
+.svc-nav .nm{font-family:var(--ff-display);font-size:20px;font-weight:600;color:var(--onyx);}
+.svc-nav a:hover .nm{color:var(--brass);}
+.svc-nav .next{text-align:right;align-items:flex-end;}
+
+/* ---- Imprint (impresszum): key/value rows ---- */
+.kv .row{display:flex;gap:18px;padding:15px 0;border-bottom:1px solid color-mix(in srgb,var(--stone) 24%,transparent);font-size:17px;}
+.kv .row:first-child{border-top:1px solid color-mix(in srgb,var(--stone) 24%,transparent);}
+.kv .k{font-family:var(--ff-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);width:190px;flex:none;padding-top:4px;}
+.kv .v{color:var(--onyx);}
+
+/* ---- Privacy (adatvedelem): draft banner ---- */
+.draft-note{background:color-mix(in srgb,var(--brass) 12%,var(--bone));border:1px solid color-mix(in srgb,var(--brass) 40%,transparent);padding:16px 20px;font-size:14.5px;color:var(--onyx);margin-bottom:36px;border-radius:2px;}
+
+/* ---- About responsive ---- */
+@media (max-width:860px){
+  .principles{grid-template-columns:1fr;}
+  .principle,.principle:not(:first-child){padding:28px 0;border-left:0;}
+}

@@ -3,62 +3,66 @@
 Bilingual (Hungarian master / English) marketing website for **KAT Könyvszakértő,
 Adószakértő, Tanácsadó Zrt.**, a Budapest accounting · payroll · advisory · tax firm.
 
-It is a **static, multi-page site** — plain HTML/CSS/JS, no build step. The pages are
-the design source of truth from the Claude Design handoff (see `HANDOFF.md`), shipped
-as-is. Hosted on **GitHub Pages** (deploy from the `main` branch).
+Built as a **Vite + React 18 single-page app** (mirroring the OTOBOT project), from the
+Claude Design handoff (`HANDOFF.md`). The design system `kat.css` is reused verbatim, so
+the look stays pixel-identical to the handoff; the page structure, i18n, motion and form
+are implemented in React.
 
-## Structure
+## Stack
 
-```
-index.html            Home (hero, services, credibility band, About, The Register, contact form)
-rolunk.html           About
-szolgaltatasok.html   Services index (01–04)
-konyveles.html        Accounting   ┐
-berszamfejtes.html    Payroll      │ four service detail pages
-tanacsadas.html       Advisory     │ (shared template)
-adotanacsadas.html    Tax advisory ┘
-referenciak.html      References ("The Register", grouped by sector)
-kapcsolat.html        Contact (details, map placeholder, enquiry form)
-impresszum.html       Imprint (legal company data)
-adatvedelem.html      Privacy notice (GDPR)
-
-kat.css               Complete design system (tokens, components, motion, responsive) — canonical
-kat.js                Shared behaviour (reveal observer, HU/EN toggle, mobile menu, form validation, ledger)
-kat-logo.png          White wordmark (header + footer)
-.nojekyll             Serve files as-is on GitHub Pages (no Jekyll processing)
-
-HANDOFF.md            The original design handoff spec (reference)
-CLAUDE.md             Build constitution + project notes for Claude
-```
+- **Vite + React 18** SPA with **hash-based routing** (`#/rolunk`, `#/konyveles`, …)
+- `kat.css` = the canonical design system (reused verbatim); `pages.css` = a few
+  page-specific styles ported from the design's per-page `<style>` blocks
+- `base: "./"` in `vite.config.js` so assets resolve under the GitHub Pages subpath
+- Deployed to **GitHub Pages via GitHub Actions** (`.github/workflows/deploy.yml`:
+  `npm ci` → `vite build` → publish `dist/`)
 
 ## Run locally
 
-It's static — just open `index.html` in a browser. For a proper local server (so
-relative links and `fetch` behave exactly like production):
-
 ```bash
-# any static server, e.g.
-npx serve .
-# or
-python -m http.server 8000
+npm install      # first time
+npm run dev      # Vite dev server (hot reload)
+npm run build    # production build → dist/
+npm run preview  # serve the built dist/
 ```
+
+## Source layout
+
+```
+index.html        Vite entry (head: title, meta, Google Fonts)
+src/main.jsx      App + hash router + per-route titles, mounts <LangProvider>
+src/ui.jsx        Lang context + <T hu en> helper, useReveal/useTilt hooks,
+                  Header, Footer, PageHero, CtaBand, Ledger, EnquiryForm
+src/pages.jsx     Home, About, Services, ServiceDetail (data-driven), References,
+                  Contact, Imprint, Privacy
+src/data.js       Bilingual content: SERVICES (01–04), REFERENCES, REGISTER_GROUPS
+src/kat.css       Canonical design system (verbatim from the handoff)
+src/pages.css     Page-specific styles (principles, svc-nav, kv rows, draft note)
+src/kat-logo.png  White wordmark (header + footer)
+HANDOFF.md        Original design handoff spec (reference)
+CLAUDE.md         Build constitution + project notes
+```
+
+### i18n
+Every translatable string is provided in both languages via the `<T hu="…" en="…" />`
+helper (use `html` for inline markup, `as="div" html` for block HTML). A `LangProvider`
+holds the current language (persisted in `localStorage` under `kat-lang`, default `hu`)
+and re-renders all `<T>` when it changes. Do **not** translate company/brand names in the
+Register, the firm name, or Hungarian addresses.
 
 ## Deploy
 
-GitHub Pages is set to **deploy from branch** (`main`, root). Push to `main` and the
-live site updates automatically — no build, no Actions workflow.
-
+Every push to `main` triggers the **Deploy to GitHub Pages** workflow.
 Live URL: https://gyepe.github.io/kat-zrt-website/
 
 ## Before go-live — real data still needed
 
-See `CLAUDE.md` and `HANDOFF.md` for the full list. The big ones:
 1. **Contact-form backend** — wire the enquiry form to email `info@katzrt.hu`
-   (planned via Web3Forms, client-side, like the OTOBOT site). The form must not go
-   live before the privacy page is final.
-2. **Legal values** in `impresszum.html` — cégjegyzékszám, adószám, képviselő,
-   tárhelyszolgáltató (currently "megadás alatt").
-3. **Final privacy text** in `adatvedelem.html` (currently a labelled draft).
-4. **Full client roster** for The Register (only 8 of ~23 shown).
+   (planned via Web3Forms, client-side, like OTOBOT). Must not go live before the
+   privacy page is final.
+2. **Legal values** in `src/pages.jsx` Imprint (cégjegyzékszám, adószám, képviselő,
+   tárhelyszolgáltató — currently "megadás alatt").
+3. **Final privacy text** (currently a labelled draft).
+4. **Full client roster** for The Register (8 of ~23 shown — edit `src/data.js`).
 5. **Photography** for the `.bg-ph` placeholders.
-6. **SEO** — per-page meta description, OG tags, sitemap, robots, JSON-LD.
+6. **SEO** — per-page meta/OG, sitemap, robots, JSON-LD.

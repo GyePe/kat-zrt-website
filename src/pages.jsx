@@ -399,9 +399,6 @@ export function Contact() {
 }
 
 /* ============================================================ IMPRINT */
-function ToBeProvided() {
-  return <em style={{ color: "var(--stone)" }}><T hu="megadás alatt" en="to be provided" /></em>;
-}
 export function Imprint() {
   return (
     <>
@@ -418,9 +415,9 @@ export function Imprint() {
               <div className="row"><span className="k"><T hu="Cégnév" en="Company name" /></span><span className="v">KAT Könyvszakértő, Adószakértő, Tanácsadó Zrt.</span></div>
               <div className="row"><span className="k"><T hu="Rövid név" en="Short name" /></span><span className="v">KAT Zrt.</span></div>
               <div className="row"><span className="k"><T hu="Székhely" en="Registered seat" /></span><span className="v">1048 Budapest, Megyeri út 212.</span></div>
-              <div className="row"><span className="k"><T hu="Cégjegyzékszám" en="Company reg. no." /></span><span className="v"><ToBeProvided /></span></div>
-              <div className="row"><span className="k"><T hu="Adószám" en="Tax no." /></span><span className="v"><ToBeProvided /></span></div>
-              <div className="row"><span className="k"><T hu="Képviselő" en="Representative" /></span><span className="v"><ToBeProvided /></span></div>
+              <div className="row"><span className="k"><T hu="Cégjegyzékszám" en="Company reg. no." /></span><span className="v">01-10-046002</span></div>
+              <div className="row"><span className="k"><T hu="Adószám" en="Tax no." /></span><span className="v">14314038-2-43</span></div>
+              <div className="row"><span className="k"><T hu="Képviselő" en="Representative" /></span><span className="v">Szilasi Zoltán, <T hu="vezérigazgató" en="Managing Director" /></span></div>
               <div className="row"><span className="k"><T hu="Telefon" en="Phone" /></span><span className="v">+36 30 194 2034</span></div>
               <div className="row"><span className="k"><T hu="E-mail" en="Email" /></span><span className="v">info@katzrt.hu</span></div>
               <div className="row"><span className="k"><T hu="Tárhelyszolgáltató" en="Hosting provider" /></span><span className="v">GitHub Pages — GitHub, Inc.<br />88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA</span></div>

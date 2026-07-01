@@ -423,7 +423,7 @@ export function Imprint() {
               <div className="row"><span className="k"><T hu="Képviselő" en="Representative" /></span><span className="v"><ToBeProvided /></span></div>
               <div className="row"><span className="k"><T hu="Telefon" en="Phone" /></span><span className="v">+36 30 194 2034</span></div>
               <div className="row"><span className="k"><T hu="E-mail" en="Email" /></span><span className="v">info@katzrt.hu</span></div>
-              <div className="row"><span className="k"><T hu="Tárhelyszolgáltató" en="Hosting provider" /></span><span className="v"><ToBeProvided /></span></div>
+              <div className="row"><span className="k"><T hu="Tárhelyszolgáltató" en="Hosting provider" /></span><span className="v">GitHub Pages — GitHub, Inc.<br />88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA</span></div>
             </div>
             <p style={{ marginTop: 34, color: "var(--stone)", fontSize: 15 }}>
               <T html
@@ -451,7 +451,7 @@ export function Privacy() {
       <section className="sec sec-ivory">
         <div className="wrap">
           <div className="prose rv">
-            <div className="draft-note"><T hu="⚠ Tervezet — a végleges, jogilag jóváhagyott szöveggel és a hiányzó cégadatokkal kell kiegészíteni az éles indulás előtt." en="⚠ Draft — to be completed with the final, legally approved text and the missing company data before go-live." /></div>
+            <div className="draft-note"><T hu="⚠ A tájékoztató jogi véleményezés alatt áll, és a hiányzó cégadatokkal (cégjegyzékszám, adószám) egészül ki az éles indulás előtt." en="⚠ This notice is under legal review and will be completed with the missing company data (reg. no., tax no.) before go-live." /></div>
 
             <h2><T hu="1. Az adatkezelő" en="1. The data controller" /></h2>
             <T as="div" html
@@ -479,8 +479,8 @@ export function Privacy() {
 
             <h2><T hu="5. Adatfeldolgozók, továbbítás" en="5. Processors and transfers" /></h2>
             <T as="div" html
-              hu={`<p>Az adatokat bizalmasan kezeljük, és kizárólag a szolgáltatás nyújtásához igénybe vett adatfeldolgozók (tárhely- és e-mail-szolgáltató) férhetnek hozzá a feladatuk ellátásához szükséges mértékben. Az adatokat harmadik félnek marketing célból nem adjuk át.</p>`}
-              en={`<p>We treat the data confidentially, and only the processors used to provide the service (hosting and email providers) may access it, to the extent needed for their task. We do not share the data with third parties for marketing purposes.</p>`}
+              hu={`<p>Az adatokat bizalmasan kezeljük. A szolgáltatás nyújtásához a következő adatfeldolgozókat vesszük igénybe:</p><ul><li>a weboldal tárhelyét a <strong>GitHub Pages</strong> (GitHub, Inc., USA) biztosítja;</li><li>a kapcsolatfelvételi űrlap üzeneteit a <strong>Web3Forms</strong> (USA) továbbítja e-mailben;</li><li>az e-mailek kézbesítését a cég e-mail-szolgáltatója végzi.</li></ul><p>Ezen szolgáltatók egy része az Európai Unión kívül (USA) is végez adatkezelést. A továbbítás megfelelő garanciák mellett történik (EU–USA adatvédelmi keret, illetve az Európai Bizottság által jóváhagyott általános szerződési feltételek), amelyekről kérésre másolatot adunk. Amennyiben a weboldalon található WhatsApp gombra kattint, a beszélgetés a <strong>Meta Platforms</strong> szolgáltatásán keresztül, annak saját adatkezelési feltételei szerint zajlik. Az adatokat harmadik félnek marketing célból nem adjuk át.</p>`}
+              en={`<p>We treat your data confidentially. To provide the service we use the following processors:</p><ul><li>website hosting is provided by <strong>GitHub Pages</strong> (GitHub, Inc., USA);</li><li>contact-form messages are delivered by e-mail through <strong>Web3Forms</strong> (USA);</li><li>e-mail delivery is handled by the company's e-mail provider.</li></ul><p>Some of these providers process data outside the European Union (in the USA). Such transfers take place with appropriate safeguards (the EU–US Data Privacy Framework and/or the European Commission's standard contractual clauses), a copy of which we provide on request. If you use the WhatsApp button on this website, the conversation takes place through <strong>Meta Platforms</strong> under its own data-processing terms. We do not share your data with third parties for marketing purposes.</p>`}
             />
 
             <h2><T hu="6. Az Ön jogai" en="6. Your rights" /></h2>

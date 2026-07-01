@@ -66,6 +66,9 @@ ul.deliverables li{break-inside:avoid;}
 @media (max-width:560px){.wa-fab{right:16px;bottom:16px;padding:15px;border-radius:50%;}.wa-fab .wa-label{display:none;}}
 @media (prefers-reduced-motion: reduce){.wa-fab{transition:none;}.wa-fab:hover{transform:none;}}
 
+/* ---- Contact form: submit error message ---- */
+.form-error{margin-top:14px;font-size:14px;font-weight:500;color:#9c3b34;line-height:1.5;}
+
 /* ---- Map: consent-gated embed ---- */
 .map-ph .map-consent{font-family:var(--ff-body);font-size:13.5px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--stone);line-height:1.5;max-width:44ch;text-align:center;}
 .map-ph .map-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}

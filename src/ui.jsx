@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "./kat-logo.png";
+import { WEB3FORMS_ACCESS_KEY } from "./config.js";
 
 const { useState, useEffect, createContext, useContext } = React;
 
@@ -269,14 +270,17 @@ export function EnquiryForm() {
   const [consent, setConsent] = useState(false);
   const [consentBad, setConsentBad] = useState(false);
   const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | sending | error
+  const [hp, setHp] = useState(""); // honeypot
   const set = (k) => (e) => {
     const val = e.target.value;
     setV((s) => ({ ...s, [k]: val }));
     setBad((s) => ({ ...s, [k]: false }));
   };
   const emailOK = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
+  const keyMissing = !WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY.startsWith("REPLACE");
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     const b = {
       nev: v.nev.trim().length <= 1,
@@ -288,7 +292,35 @@ export function EnquiryForm() {
     const cBad = !consent;
     setConsentBad(cBad);
     if (Object.values(b).some(Boolean) || cBad) return;
-    setSent(true);
+    if (hp) { setSent(true); return; } // honeypot tripped → silently accept, don't send
+    if (keyMissing) {
+      // No Web3Forms key yet: show success without sending (see src/config.js).
+      console.warn("[KAT] Web3Forms access key not set — form is not sending yet.");
+      setSent(true);
+      return;
+    }
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "Új ajánlatkérés — KAT Zrt. weboldal",
+          from_name: v.nev || "KAT weboldal",
+          name: v.nev,
+          company: v.ceg,
+          email: v.email,
+          phone: v.tel,
+          message: v.uzenet,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) { setStatus("idle"); setSent(true); }
+      else setStatus("error");
+    } catch {
+      setStatus("error");
+    }
   };
 
   const fieldCls = (k) => "field" + (bad[k] ? " invalid" : "");
@@ -337,9 +369,21 @@ export function EnquiryForm() {
             />
           </label>
         </div>
-        <button type="submit" className="btn btn-primary">
-          <T hu="Ajánlatot kérek" en="Request a quote" /> <span className="arr">→</span>
+        <input
+          type="text" name="website" value={hp} onChange={(e) => setHp(e.target.value)}
+          tabIndex={-1} autoComplete="off" aria-hidden="true"
+          style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+        />
+        <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
+          {status === "sending"
+            ? <T hu="Küldés…" en="Sending…" />
+            : <><T hu="Ajánlatot kérek" en="Request a quote" /> <span className="arr">→</span></>}
         </button>
+        {status === "error" && (
+          <p className="form-error" role="alert">
+            <T hu="Nem sikerült elküldeni az üzenetet. Kérjük, próbálja újra, vagy írjon a info@katzrt.hu címre." en="We couldn't send your message. Please try again, or email info@katzrt.hu." />
+          </p>
+        )}
       </div>
       <div className="form-success">
         <div className="chk" aria-hidden="true">✓</div>

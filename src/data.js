@@ -167,3 +167,67 @@ export const SERVICES = [
     ctaEn: "Request a quote for our tax advisory service.",
   },
 ];
+
+/* ------------------------------------------------------------
+   In-depth service content (How it works / What you receive / FAQ).
+   PLACEHOLDER — generic template copy shared across all four services,
+   to be replaced with the company's real, per-service text.
+   ------------------------------------------------------------ */
+export const SERVICE_EXTRA = {
+  process: [
+    {
+      titleHu: "Bevezetés és igényfelmérés", titleEn: "Onboarding and scoping",
+      descHu: "Átbeszéljük a cég működését, a jelenlegi folyamatokat és az elvárásokat, majd összeállítjuk a személyre szabott együttműködés kereteit.",
+      descEn: "We discuss how your company operates, your current processes and your expectations, then set up a framework for working together that fits you.",
+    },
+    {
+      titleHu: "Adatátvétel és beállítás", titleEn: "Handover and setup",
+      descHu: "Rendezetten átvesszük a szükséges adatokat és dokumentumokat, egyeztetjük a felelősöket és a határidőket, és beállítjuk a közös munkamenetet.",
+      descEn: "We take over the necessary data and documents in an orderly way, agree responsibilities and deadlines, and set up the shared workflow.",
+    },
+    {
+      titleHu: "Folyamatos, ütemezett munka", titleEn: "Ongoing, scheduled work",
+      descHu: "A megbeszélt ütemben elvégezzük a feladatokat, időben jelezzük, ha valami figyelmet igényel, és végig egy dedikált kapcsolattartóval dolgozik.",
+      descEn: "We carry out the work on the agreed schedule, flag anything that needs attention in good time, and you work throughout with a dedicated contact.",
+    },
+    {
+      titleHu: "Riportálás és visszajelzés", titleEn: "Reporting and review",
+      descHu: "Érthető összefoglalót adunk az eredményekről, átbeszéljük a következő lépéseket, és igény szerint testre szabjuk a folyamatot.",
+      descEn: "We provide a clear summary of the results, review the next steps with you, and tailor the process to your needs as we go.",
+    },
+  ],
+  deliverables: [
+    { hu: "Rendszeres, időszaki kimutatások", en: "Regular, periodic statements" },
+    { hu: "Határidőre benyújtott bevallások és dokumentumok", en: "Filings and documents submitted on time" },
+    { hu: "Egyeztetett, átlátható nyilvántartások", en: "Reconciled, transparent records" },
+    { hu: "Érthető vezetői összefoglaló igény szerint", en: "A clear management summary on request" },
+    { hu: "Dedikált kapcsolattartó szakértő", en: "A dedicated specialist as your contact" },
+    { hu: "Határidőnaptár és időben küldött emlékeztetők", en: "A deadline calendar and timely reminders" },
+  ],
+  faq: [
+    {
+      qHu: "Hogyan zajlik az átállás egy másik szolgáltatótól?",
+      qEn: "How does switching from another provider work?",
+      aHu: "Az átállást mi koordináljuk: rendezetten átvesszük az adatokat és a dokumentumokat, és gondoskodunk arról, hogy a folyamatban ne legyen fennakadás.",
+      aEn: "We coordinate the switch: we take over your data and documents in an orderly way and make sure there's no disruption in the process.",
+    },
+    {
+      qHu: "Milyen gyakran kapok tájékoztatást?",
+      qEn: "How often will I hear from you?",
+      aHu: "A megbeszélt ütem szerint rendszeresen tájékoztatjuk, és soron kívül is jelezünk, ha valami döntést vagy figyelmet igényel.",
+      aEn: "We keep you informed regularly on the agreed schedule, and reach out promptly whenever something needs a decision or your attention.",
+    },
+    {
+      qHu: "Hogyan adom át az adatokat és a dokumentumokat?",
+      qEn: "How do I hand over data and documents?",
+      aHu: "Rugalmasan alkalmazkodunk a cég meglévő rendszereihez és szokásaihoz; a részleteket a bevezetéskor közösen alakítjuk ki.",
+      aEn: "We adapt flexibly to your company's existing systems and habits; we work out the details together during onboarding.",
+    },
+    {
+      qHu: "Mennyibe kerül a szolgáltatás?",
+      qEn: "How much does the service cost?",
+      aHu: "Az ár a cég méretétől, összetettségétől és igényeitől függ. Néhány mondatban leírt helyzet alapján egy munkanapon belül személyre szabott ajánlatot adunk.",
+      aEn: "Pricing depends on your company's size, complexity and needs. Based on a few sentences about your situation, we'll send a tailored quote within one business day.",
+    },
+  ],
+};

@@ -2,7 +2,7 @@ import React from "react";
 import * as ReactDOM from "react-dom/client";
 import "./kat.css";
 import "./pages.css";
-import { LangProvider, Header, Footer, useReveal, useTilt, useLang } from "./ui.jsx";
+import { LangProvider, Header, Footer, WhatsAppFab, useReveal, useTilt, useLang } from "./ui.jsx";
 import { Home, About, Services, ServiceDetail, References, Contact, Imprint, Privacy } from "./pages.jsx";
 import { SERVICES } from "./data.js";
 
@@ -71,6 +71,7 @@ function App() {
       <Header route={route} />
       <View route={route} />
       <Footer />
+      <WhatsAppFab />
     </>
   );
 }

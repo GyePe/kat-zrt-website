@@ -1,6 +1,6 @@
 import React from "react";
-import { T, PageHero, Crumb, CtaBand, Ledger, EnquiryForm, QuoteButton } from "./ui.jsx";
-import { SERVICES, REFERENCES, REGISTER_GROUPS } from "./data.js";
+import { T, PageHero, Crumb, CtaBand, Ledger, EnquiryForm, QuoteButton, MapEmbed } from "./ui.jsx";
+import { SERVICES, REFERENCES, REGISTER_GROUPS, SERVICE_EXTRA } from "./data.js";
 
 /* Shared CTA-band copy used by several pages */
 const QUOTE_TEXT = {
@@ -255,6 +255,58 @@ export function ServiceDetail({ slug }) {
           </div>
         </div>
       </section>
+      <section className="sec sec-ivory">
+        <div className="wrap">
+          <div className="draft-note"><T hu="Bővített tartalom — általános sablonszöveg, a végleges megfogalmazás egyeztetés alatt." en="Extended content — generic template text; final wording under review." /></div>
+          <div className="sec-head rv">
+            <span className="eyebrow"><T hu="Hogyan zajlik" en="How it works" /></span>
+            <h2 className="h2"><T hu="Az együttműködés lépésről lépésre." en="Working together, step by step." /></h2>
+          </div>
+          <div className="process stagger">
+            {SERVICE_EXTRA.process.map((p, ix) => (
+              <div className="step" key={ix}>
+                <span className="idx">{String(ix + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3><T hu={p.titleHu} en={p.titleEn} /></h3>
+                  <p><T hu={p.descHu} en={p.descEn} /></p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sec sec-bone">
+        <div className="wrap">
+          <div className="sec-head rv">
+            <span className="eyebrow"><T hu="Mit kap kézhez" en="What you receive" /></span>
+            <h2 className="h2"><T hu="Kézzelfogható eredmények." en="Tangible results." /></h2>
+          </div>
+          <div className="prose rv">
+            <ul className="deliverables">
+              {SERVICE_EXTRA.deliverables.map((d, ix) => <li key={ix}><T hu={d.hu} en={d.en} /></li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec sec-ivory">
+        <div className="wrap">
+          <div className="sec-head rv">
+            <span className="eyebrow"><T hu="Gyakori kérdések" en="FAQ" /></span>
+            <h2 className="h2"><T hu="Gyakori kérdések." en="Frequently asked questions." /></h2>
+          </div>
+          <div className="faq rv">
+            {SERVICE_EXTRA.faq.map((f, ix) => (
+              <details className="faq-item" key={ix}>
+                <summary><T hu={f.qHu} en={f.qEn} /></summary>
+                <div className="faq-a"><T hu={f.aHu} en={f.aEn} /></div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CtaBand titleHu={s.ctaHu} titleEn={s.ctaEn} textHu={QUOTE_TEXT.hu} textEn={QUOTE_TEXT.en} />
       <section className="sec sec-ivory" style={{ paddingTop: 0 }}>
         <div className="wrap">
@@ -336,10 +388,7 @@ export function Contact() {
                 <div className="row"><span className="k"><T hu="Cím" en="Address" /></span><span className="v">1048 Budapest, Megyeri út 212.</span></div>
                 <div className="row"><span className="k"><T hu="Nyitva" en="Hours" /></span><span className="v"><T hu="Hétköznap 9:00–17:00" en="Weekdays 9:00–17:00" /></span></div>
               </div>
-              <div className="map-ph" role="img" aria-label="Térkép helye — 1048 Budapest, Megyeri út 212.">
-                <span className="tag"><T hu="Térkép · 1048 Budapest, Megyeri út 212." en="Map · 1048 Budapest, Megyeri út 212." /></span>
-                <a className="btn btn-ghost-dark" href="https://www.google.com/maps/search/?api=1&query=1048+Budapest+Megyeri+%C3%BAt+212" target="_blank" rel="noopener"><T hu="Útvonalterv" en="Directions" /> <span className="arr">→</span></a>
-              </div>
+              <MapEmbed />
             </div>
             <EnquiryForm />
           </div>

@@ -349,3 +349,65 @@ export function EnquiryForm() {
     </form>
   );
 }
+
+/* ============================================================
+   WhatsApp floating button (site-wide). Number: +36 30 194 2034.
+   ============================================================ */
+export function WhatsAppFab() {
+  const { lang } = useLang();
+  const msg = lang === "en"
+    ? "Hello! I'd like to ask about your services."
+    : "Jó napot! Szeretnék érdeklődni a szolgáltatásaikról.";
+  const href = "https://wa.me/36301942034?text=" + encodeURIComponent(msg);
+  return (
+    <a className="wa-fab" href={href} target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 .5C7.4.5.5 7.4.5 16c0 2.82.74 5.55 2.14 7.97L.4 31.6l7.83-2.05A15.4 15.4 0 0 0 16 31.5C24.6 31.5 31.5 24.6 31.5 16S24.6.5 16 .5Zm0 28.3c-2.5 0-4.96-.67-7.11-1.94l-.51-.3-4.65 1.22 1.24-4.53-.33-.52A12.7 12.7 0 0 1 3.3 16C3.3 8.98 9 3.28 16 3.28c3.4 0 6.6 1.33 9 3.73a12.66 12.66 0 0 1 3.72 9c0 7.02-5.7 12.79-12.72 12.79Zm7.3-9.55c-.4-.2-2.36-1.16-2.72-1.3-.37-.13-.63-.2-.9.2-.27.4-1.04 1.3-1.27 1.57-.23.27-.47.3-.86.1-.4-.2-1.68-.62-3.2-1.97-1.18-1.05-1.98-2.35-2.21-2.75-.23-.4-.02-.61.17-.81.18-.18.4-.47.6-.7.2-.24.27-.4.4-.67.14-.27.07-.5-.03-.7-.1-.2-.9-2.16-1.23-2.96-.32-.78-.65-.67-.9-.68l-.76-.02c-.27 0-.7.1-1.06.5-.37.4-1.4 1.36-1.4 3.32s1.43 3.85 1.63 4.12c.2.27 2.82 4.3 6.83 6.03.95.41 1.7.66 2.28.84.96.3 1.83.26 2.52.16.77-.12 2.36-.97 2.7-1.9.33-.94.33-1.74.23-1.9-.1-.18-.36-.28-.76-.48Z"/>
+      </svg>
+      <span className="wa-label">WhatsApp</span>
+    </a>
+  );
+}
+
+/* ============================================================
+   Google Maps — privacy-conscious click-to-load embed.
+   No third-party request until the user opts in.
+   ============================================================ */
+const MAP_ADDRESS = "1048 Budapest, Megyeri út 212.";
+const MAP_DIRECTIONS = "https://www.google.com/maps/search/?api=1&query=1048+Budapest+Megyeri+%C3%BAt+212";
+export function MapEmbed() {
+  const [show, setShow] = useState(false);
+  if (show) {
+    const src = "https://www.google.com/maps?q=" + encodeURIComponent(MAP_ADDRESS) + "&z=16&output=embed";
+    return (
+      <div className="map-embed">
+        <iframe
+          title="KAT Zrt — 1048 Budapest, Megyeri út 212."
+          src={src}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen
+        ></iframe>
+        <div className="map-actions">
+          <a className="btn btn-ghost-dark" href={MAP_DIRECTIONS} target="_blank" rel="noopener">
+            <T hu="Útvonalterv" en="Directions" /> <span className="arr">→</span>
+          </a>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="map-ph" role="group" aria-label={"Térkép — " + MAP_ADDRESS}>
+      <span className="tag"><T hu={"Térkép · " + MAP_ADDRESS} en={"Map · " + MAP_ADDRESS} /></span>
+      <p className="map-consent"><T hu="A térkép a Google Maps szolgáltatásból töltődik be. A betöltéssel elfogadja a Google adatkezelését." en="The map loads from Google Maps. Loading it accepts Google's data processing." /></p>
+      <div className="map-actions">
+        <button type="button" className="btn btn-primary" onClick={() => setShow(true)}>
+          <T hu="Térkép betöltése" en="Load map" />
+        </button>
+        <a className="btn btn-ghost-dark" href={MAP_DIRECTIONS} target="_blank" rel="noopener">
+          <T hu="Útvonalterv" en="Directions" /> <span className="arr">→</span>
+        </a>
+      </div>
+    </div>
+  );
+}

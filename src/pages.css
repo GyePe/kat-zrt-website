@@ -34,3 +34,41 @@
   .principles{grid-template-columns:1fr;}
   .principle,.principle:not(:first-child){padding:28px 0;border-left:0;}
 }
+
+/* ---- Service detail: "How it works" numbered process ---- */
+.process{border-top:1px solid color-mix(in srgb,var(--stone) 32%,transparent);}
+.step{display:grid;grid-template-columns:72px 1fr;gap:26px;align-items:start;padding:28px 14px 28px 18px;border-bottom:1px solid color-mix(in srgb,var(--stone) 32%,transparent);}
+.step .idx{font-family:var(--ff-mono);font-size:15px;font-weight:500;color:var(--stone);padding-top:4px;}
+.step h3{font-size:clamp(20px,2.4vw,26px);font-weight:600;margin-bottom:8px;}
+.step p{color:var(--stone);font-size:16.5px;line-height:1.55;max-width:60ch;}
+@media (max-width:860px){.step{grid-template-columns:48px 1fr;gap:16px;}}
+
+/* ---- Service detail: "What you receive" deliverables (2-col list) ---- */
+ul.deliverables{columns:2;column-gap:48px;margin-bottom:0;}
+ul.deliverables li{break-inside:avoid;}
+@media (max-width:720px){ul.deliverables{columns:1;}}
+
+/* ---- Service detail: FAQ accordion (native <details>) ---- */
+.faq{border-top:1px solid color-mix(in srgb,var(--stone) 32%,transparent);}
+.faq-item{border-bottom:1px solid color-mix(in srgb,var(--stone) 32%,transparent);}
+.faq-item summary{font-family:var(--ff-display);font-size:clamp(18px,2vw,21px);font-weight:600;color:var(--onyx);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:22px 2px;transition:color .2s ease;}
+.faq-item summary:hover{color:var(--teal);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:"+";font-family:var(--ff-mono);font-size:22px;font-weight:400;color:var(--brass);line-height:1;flex:none;transition:transform .2s ease;}
+.faq-item[open] summary::after{content:"–";}
+.faq-item .faq-a{color:var(--stone);font-size:16.5px;line-height:1.62;padding:0 2px 24px;max-width:72ch;}
+
+/* ---- WhatsApp floating button (site-wide) ---- */
+.wa-fab{position:fixed;right:22px;bottom:22px;z-index:60;display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:13px 19px 13px 15px;border-radius:999px;box-shadow:0 12px 30px -10px rgba(4,45,20,.5);font-family:var(--ff-body);font-weight:600;font-size:15px;line-height:1;transition:transform .25s ease,box-shadow .25s ease,background .2s ease;}
+.wa-fab:hover{background:#1ebe5b;transform:translateY(-2px);box-shadow:0 18px 38px -12px rgba(4,45,20,.55);}
+.wa-fab svg{width:26px;height:26px;fill:#fff;flex:none;}
+.wa-fab .wa-label{white-space:nowrap;}
+@media (max-width:560px){.wa-fab{right:16px;bottom:16px;padding:15px;border-radius:50%;}.wa-fab .wa-label{display:none;}}
+@media (prefers-reduced-motion: reduce){.wa-fab{transition:none;}.wa-fab:hover{transform:none;}}
+
+/* ---- Map: consent-gated embed ---- */
+.map-ph .map-consent{font-family:var(--ff-body);font-size:13.5px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--stone);line-height:1.5;max-width:44ch;text-align:center;}
+.map-ph .map-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.map-embed{margin-top:30px;}
+.map-embed iframe{width:100%;height:320px;border:1px solid color-mix(in srgb,var(--stone) 26%,transparent);border-radius:2px;display:block;}
+.map-embed .map-actions{margin-top:14px;}
